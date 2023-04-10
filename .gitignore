@@ -1,0 +1,9 @@
+CppCheckResults.xml
+
+*.cbp
+*.o
+*.depend
+*.layout
+
+bin/
+obj/
