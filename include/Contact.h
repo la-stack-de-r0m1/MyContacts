@@ -23,6 +23,7 @@ class Contact
 
     private:
         bool areParametersValid() const;
+        void clearPersonalInfo();
 
 };
 

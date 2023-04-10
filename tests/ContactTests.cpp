@@ -32,4 +32,13 @@ BOOST_AUTO_TEST_CASE( testThrowIfEmptyPersonalInfo )
     BOOST_CHECK_THROW(Contact("", "", ""), std::logic_error);
 }
 
+BOOST_AUTO_TEST_CASE( testTrimSpacesCharacters )
+{
+    Contact c{" Romain\t", "  Bertholon  ", "\tr0m1  "};
+
+    BOOST_TEST("Romain" == c.get_firstname());
+    BOOST_TEST("Bertholon" == c.get_lastname());
+    BOOST_TEST("r0m1" == c.get_nickname());
+}
+
 BOOST_AUTO_TEST_SUITE_END( )

@@ -1,4 +1,6 @@
 CppCheckResults.xml
+ValgrindOut.xml
+
 
 *.cbp
 *.o
