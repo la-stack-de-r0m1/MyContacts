@@ -89,7 +89,13 @@ BOOST_AUTO_TEST_CASE( testUpdateNickname)
 
 BOOST_AUTO_TEST_CASE( testThrowIfUpdateNicknameIsEmpty)
 {
+    ContactIdentity ci{"", "", "r0m1"};
 
+    BOOST_CHECK_THROW(ci.setNickname(""), std::logic_error);
+    BOOST_TEST("r0m1" == ci.getNickname());
+
+    BOOST_CHECK_THROW(ci.setNickname("   \t\n"), std::logic_error);
+    BOOST_TEST("r0m1" == ci.getNickname());
 
 }
 
