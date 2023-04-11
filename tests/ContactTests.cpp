@@ -9,21 +9,21 @@ BOOST_AUTO_TEST_SUITE ( ContactTests )
 BOOST_AUTO_TEST_CASE( testGetFirstName )
 {
     Contact c{"Romain", ""};
-    const auto firstname = c.get_firstname();
+    const auto firstname = c.getIdentity().getFirstname();
     BOOST_TEST(firstname == "Romain");
 }
 
 BOOST_AUTO_TEST_CASE( testGetLastName )
 {
     Contact c{"", "Bertholon"};
-    const auto lastname = c.get_lastname();
+    const auto lastname = c.getIdentity().getLastname();
     BOOST_TEST(lastname == "Bertholon");
 }
 
 BOOST_AUTO_TEST_CASE( testGetNickName )
 {
     Contact c{"", "", "r0m1"};
-    const auto nicktname = c.get_nickname();
+    const auto nicktname = c.getIdentity().getNickname();
     BOOST_TEST(nicktname == "r0m1");
 }
 
@@ -36,9 +36,25 @@ BOOST_AUTO_TEST_CASE( testTrimSpacesCharacters )
 {
     Contact c{" Romain\t", "  Bertholon  ", "\tr0m1  "};
 
-    BOOST_TEST("Romain" == c.get_firstname());
-    BOOST_TEST("Bertholon" == c.get_lastname());
-    BOOST_TEST("r0m1" == c.get_nickname());
+    BOOST_TEST("Romain" == c.getIdentity().getFirstname());
+    BOOST_TEST("Bertholon" == c.getIdentity().getLastname());
+    BOOST_TEST("r0m1" == c.getIdentity().getNickname());
 }
+
+BOOST_AUTO_TEST_CASE( testAddPersonalInfo )
+{
+    Contact c{"romain"};
+    c.setPersonalInfo("Phone Number", "0123456789");
+    auto phone_number = c.getPersonalInfo("Phone Number");
+
+    BOOST_TEST("0123456789" == phone_number);
+}
+
+BOOST_AUTO_TEST_CASE( testThrowIfPersonalInfoNotFound )
+{
+    Contact c{"romain"};
+    BOOST_CHECK_THROW(c.getPersonalInfo("Phone Number"), std::out_of_range);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END( )

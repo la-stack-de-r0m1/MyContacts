@@ -9,35 +9,30 @@ namespace MyContacts
 Contact::Contact(const std::string& firstname,
                  const std::string& lastname,
                  const std::string& nickname)
-    : firstname{std::move(StringHelpers::cleanString(firstname))}
-    , lastname{std::move(StringHelpers::cleanString(lastname))}
-    , nickname{std::move(StringHelpers::cleanString(nickname))}
+    : identity{firstname, lastname, nickname}
 {
-    if (!areParametersValid())
-        throw std::logic_error{"Personal information not set."};
 }
 
-const std::string& Contact::get_firstname() const
+const ContactIdentity& Contact::getIdentity() const
 {
-    return firstname;
+    return identity;
 }
 
-const std::string& Contact::get_lastname() const
+const std::string Contact::getPersonalInfo(const std::string& name) const
 {
-    return lastname;
+    try
+    {
+        return personalInformation.at(name);
+    }
+    catch (const std::out_of_range& e)
+    {
+        throw e;
+    }
 }
 
-const std::string& Contact::get_nickname() const
+void Contact::setPersonalInfo(const std::string& name, const std::string& value)
 {
-    return nickname;
-}
-
-bool Contact::areParametersValid() const
-{
-    return
-        !firstname.empty() ||
-        !lastname.empty() ||
-        !nickname.empty();
+    personalInformation[name] = value;
 }
 
 }
