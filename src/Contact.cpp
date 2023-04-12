@@ -18,6 +18,12 @@ const ContactIdentity& Contact::getIdentity() const
     return identity;
 }
 
+ContactIdentity& Contact::getIdentity()
+{
+    return identity;
+}
+
+
 const std::string Contact::getPersonalInfo(const std::string& name) const
 {
     try

@@ -20,6 +20,8 @@ class Contact
                 const std::string& nickname = "");
 
         const ContactIdentity& getIdentity() const;
+        ContactIdentity& getIdentity();
+
         void setPersonalInfo(const std::string& name, const std::string& value);
         const std::string getPersonalInfo(const std::string& name) const;
 };

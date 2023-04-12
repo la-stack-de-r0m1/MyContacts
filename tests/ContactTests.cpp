@@ -27,6 +27,30 @@ BOOST_AUTO_TEST_CASE( testGetNickName )
     BOOST_TEST(nicktname == "r0m1");
 }
 
+BOOST_AUTO_TEST_CASE( testSetFirstName )
+{
+    Contact c{"Romain", ""};
+    c.getIdentity().setFirstname("Jean");
+    const auto firstname = c.getIdentity().getFirstname();
+    BOOST_TEST(firstname == "Jean");
+}
+
+BOOST_AUTO_TEST_CASE( testSetLastName )
+{
+    Contact c{"", "Bertholon"};
+    c.getIdentity().setLastname("Dupont");
+    const auto lastname = c.getIdentity().getLastname();
+    BOOST_TEST(lastname == "Dupont");
+}
+
+BOOST_AUTO_TEST_CASE( testSetNickName )
+{
+    Contact c{"", "", "r0m1"};
+    c.getIdentity().setNickname("m0r1");
+    const auto nickname = c.getIdentity().getNickname();
+    BOOST_TEST(nickname == "m0r1");
+}
+
 BOOST_AUTO_TEST_CASE( testThrowIfEmptyPersonalInfo )
 {
     BOOST_CHECK_THROW(Contact("", "", ""), std::logic_error);
@@ -55,6 +79,5 @@ BOOST_AUTO_TEST_CASE( testThrowIfPersonalInfoNotFound )
     Contact c{"romain"};
     BOOST_CHECK_THROW(c.getPersonalInfo("Phone Number"), std::out_of_range);
 }
-
 
 BOOST_AUTO_TEST_SUITE_END( )
