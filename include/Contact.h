@@ -24,6 +24,8 @@ class Contact
 
         void setPersonalInfo(const std::string& name, const std::string& value);
         const std::string getPersonalInfo(const std::string& name) const;
+
+        std::string get(const std::string&) { return ""; }
 };
 
 } //namespace MyContacts

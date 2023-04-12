@@ -80,4 +80,14 @@ BOOST_AUTO_TEST_CASE( testThrowIfPersonalInfoNotFound )
     BOOST_CHECK_THROW(c.getPersonalInfo("Phone Number"), std::out_of_range);
 }
 
+BOOST_AUTO_TEST_CASE( createPersonalInfoCategoryIfNotExist )
+{
+   /* Contact contact{"romain"};
+    contact.setPersonalInfo("Contacts", {"E-mail", "r0m1@me.com"});
+
+    const auto contactInfo = contact.get("Contacts");
+    const auto email{""}; // = contactInfo.get("E-mail");
+    BOOST_TEST("r0m1@me.com" == email);*/
+}
+
 BOOST_AUTO_TEST_SUITE_END( )
