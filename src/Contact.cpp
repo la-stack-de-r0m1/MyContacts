@@ -23,24 +23,6 @@ ContactIdentity& Contact::getIdentity()
     return identity;
 }
 
-
-const std::string& Contact::getPersonalInfo(const std::string& name) const
-{
-    try
-    {
-        return categories.get("Other").get(name);
-    }
-    catch (const std::out_of_range& e)
-    {
-        throw e;
-    }
-}
-
-void Contact::setPersonalInfo(const std::string& name, const std::string& value)
-{
-    createOrUpdateCategory("Other", {name, value});
-}
-
 const std::string& Contact::getDetail(const std::string& category, const std::string& detailName) const
 {
     return categories.get(category).get(detailName);
@@ -49,6 +31,16 @@ const std::string& Contact::getDetail(const std::string& category, const std::st
 void Contact::setDetail(const std::string& categoryName, const Contact::ContactDetail& detail)
 {
     createOrUpdateCategory(categoryName, detail);
+}
+
+const std::string& Contact::getGenericDetail(const std::string& name) const
+{
+    return getDetail(InformationCategory::DefaultCategory, name);
+}
+
+void Contact::setGenericDetail(const std::string& name, const std::string& value)
+{
+    createOrUpdateCategory(InformationCategory::DefaultCategory, {name, value});
 }
 
 void Contact::createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail)

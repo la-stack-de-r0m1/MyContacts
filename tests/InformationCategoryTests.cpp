@@ -31,5 +31,32 @@ BOOST_AUTO_TEST_CASE( testGetThrowIfInfoNotExist )
     BOOST_CHECK_THROW(ic.get("E-mail"), std::out_of_range);
 }
 
+BOOST_AUTO_TEST_CASE( testEqualOperatorIsEqual )
+{
+    InformationCategory lhs{"Contact details"};
+    InformationCategory rhs{"Contact details"};
+
+    bool res = (lhs == rhs);
+    BOOST_TEST(true == res);
+}
+
+BOOST_AUTO_TEST_CASE( testEqualOperatorIsDifferent )
+{
+    InformationCategory lhs{"Contact details"};
+    InformationCategory rhs{"Stuff"};
+
+    bool res = (lhs == rhs);
+    BOOST_TEST(false == res);
+}
+
+
+BOOST_AUTO_TEST_CASE( testEqualOperatorCompareName )
+{
+    InformationCategory lhs{"Contact details"};
+
+    bool res = (lhs == std::string("Contact details"));
+    BOOST_TEST(true == res);
+}
+
 
 BOOST_AUTO_TEST_SUITE_END( )

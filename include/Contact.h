@@ -11,6 +11,9 @@
 namespace MyContacts
 {
 
+/**
+*
+*/
 class Contact
 {
     ContactIdentity identity;
@@ -26,11 +29,11 @@ class Contact
         const ContactIdentity& getIdentity() const;
         ContactIdentity& getIdentity();
 
-        void setPersonalInfo(const std::string& name, const std::string& value);
-        const std::string& getPersonalInfo(const std::string& name) const;
-
         const std::string& getDetail(const std::string& category, const std::string& detailName) const;
         void setDetail(const std::string& category, const ContactDetail& detail);
+
+        void setGenericDetail(const std::string& name, const std::string& value);
+        const std::string& getGenericDetail(const std::string& name) const;
 
     private:
         void createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail);

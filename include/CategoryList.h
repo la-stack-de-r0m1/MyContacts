@@ -10,10 +10,9 @@ namespace MyContacts
 
 class CategoryList
 {
-    std::vector<InformationCategory> categories;
-
     public:
-        CategoryList();
+        using CategoriesCtr = std::vector<InformationCategory>;
+        using CategoriesCtrIter = std::vector<InformationCategory>::const_iterator;
 
         /**
         * return the INformationCategory whose name is `name`.
@@ -37,9 +36,16 @@ class CategoryList
         */
         void update(const InformationCategory& category);
 
+        /**
+        * return true if the category whose name is `name` exists, false otherwise.
+        */
         bool categoryExist(const std::string& name) const;
 
     private:
+        CategoriesCtr categories;
+
+    private:
+        CategoriesCtrIter findCategoryPos(const std::string& name) const;
         const InformationCategory& findCategory(const std::string& name) const;
 };
 

@@ -5,6 +5,8 @@
 namespace MyContacts
 {
 
+const std::string InformationCategory::DefaultCategory{"Other"};
+
 InformationCategory::InformationCategory(const std::string& categoryName)
     : categoryName{categoryName}
 {
@@ -28,3 +30,4 @@ void InformationCategory::set(const std::string& name, const std::string& value)
 }
 
 }
+
