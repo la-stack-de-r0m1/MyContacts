@@ -9,7 +9,7 @@ namespace MyContacts
 
 class InformationCategory
 {
-    const std::string categoryName;
+    std::string categoryName;
     std::map<std::string, std::string> information;
 
     public:

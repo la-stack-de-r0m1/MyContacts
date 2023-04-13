@@ -3,8 +3,10 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "ContactIdentity.h"
+#include "CategoryList.h"
 
 namespace MyContacts
 {
@@ -12,9 +14,11 @@ namespace MyContacts
 class Contact
 {
     ContactIdentity identity;
-    std::map<std::string, std::string> personalInformation;
+    CategoryList categories;
 
     public:
+        using ContactDetail =  std::pair<std::string, std::string>;
+
         Contact(const std::string& firstname,
                 const std::string& lastname = "",
                 const std::string& nickname = "");
@@ -23,9 +27,15 @@ class Contact
         ContactIdentity& getIdentity();
 
         void setPersonalInfo(const std::string& name, const std::string& value);
-        const std::string getPersonalInfo(const std::string& name) const;
+        const std::string& getPersonalInfo(const std::string& name) const;
 
-        std::string get(const std::string&) { return ""; }
+        const std::string& getDetail(const std::string& category, const std::string& detailName) const;
+        void setDetail(const std::string& category, const ContactDetail& detail);
+
+    private:
+        void createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail);
+        void createCategory(const std::string& categoryName, const ContactDetail& detail);
+        void updateCategory(const std::string& categoryName, const ContactDetail& detail);
 };
 
 } //namespace MyContacts

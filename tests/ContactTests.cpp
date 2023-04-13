@@ -80,14 +80,19 @@ BOOST_AUTO_TEST_CASE( testThrowIfPersonalInfoNotFound )
     BOOST_CHECK_THROW(c.getPersonalInfo("Phone Number"), std::out_of_range);
 }
 
-BOOST_AUTO_TEST_CASE( createPersonalInfoCategoryIfNotExist )
+BOOST_AUTO_TEST_CASE( testThrowIfCategoryIfNotExist )
 {
-   /* Contact contact{"romain"};
-    contact.setPersonalInfo("Contacts", {"E-mail", "r0m1@me.com"});
+    Contact contact{"romain"};
+    BOOST_CHECK_THROW(contact.getDetail("category", "name"), std::out_of_range);
+}
 
-    const auto contactInfo = contact.get("Contacts");
-    const auto email{""}; // = contactInfo.get("E-mail");
-    BOOST_TEST("r0m1@me.com" == email);*/
+BOOST_AUTO_TEST_CASE( testCreateCategoryIfNotExist )
+{
+    Contact contact{"romain"};
+    contact.setDetail("Contacts", {"E-mail", "r0m1@me.com"});
+
+    const auto email = contact.getDetail("Contacts", "E-mail");
+    BOOST_TEST("r0m1@me.com" == email);
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

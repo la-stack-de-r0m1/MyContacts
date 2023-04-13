@@ -24,11 +24,11 @@ ContactIdentity& Contact::getIdentity()
 }
 
 
-const std::string Contact::getPersonalInfo(const std::string& name) const
+const std::string& Contact::getPersonalInfo(const std::string& name) const
 {
     try
     {
-        return personalInformation.at(name);
+        return categories.get("Other").get(name);
     }
     catch (const std::out_of_range& e)
     {
@@ -38,7 +38,38 @@ const std::string Contact::getPersonalInfo(const std::string& name) const
 
 void Contact::setPersonalInfo(const std::string& name, const std::string& value)
 {
-    personalInformation[name] = value;
+    createOrUpdateCategory("Other", {name, value});
+}
+
+const std::string& Contact::getDetail(const std::string& category, const std::string& detailName) const
+{
+    return categories.get(category).get(detailName);
+}
+
+void Contact::setDetail(const std::string& categoryName, const Contact::ContactDetail& detail)
+{
+    createOrUpdateCategory(categoryName, detail);
+}
+
+void Contact::createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail)
+{
+    categories.categoryExist(categoryName)
+        ? updateCategory(categoryName, detail)
+        : createCategory(categoryName, detail);
+}
+
+void Contact::updateCategory(const std::string& categoryName, const ContactDetail& detail)
+{
+    auto category = categories.get(categoryName);
+    category.set(detail.first, detail.second);
+    categories.update(category);
+}
+
+void Contact::createCategory(const std::string& categoryName, const ContactDetail& detail)
+{
+    InformationCategory newCategory{categoryName};
+    newCategory.set(detail.first, detail.second);
+    categories.add(newCategory);
 }
 
 }
