@@ -16,7 +16,7 @@ const std::string& Category::get(const std::string& name) const
 {
     try
     {
-        return information.at(name);
+        return contactDetails.at(name);
     }
     catch (const std::out_of_range& e)
     {
@@ -26,7 +26,7 @@ const std::string& Category::get(const std::string& name) const
 
 void Category::set(const std::string& name, const std::string& value)
 {
-    information[name] = value;
+    contactDetails[name] = value;
 }
 
 }

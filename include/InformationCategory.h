@@ -10,7 +10,7 @@ namespace MyContacts
 class Category
 {
     std::string categoryName;
-    std::map<std::string, std::string> information;
+    std::map<std::string, std::string> contactDetails;
 
     public:
         static const std::string DefaultCategory;
