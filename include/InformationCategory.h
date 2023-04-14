@@ -7,7 +7,7 @@
 namespace MyContacts
 {
 
-class InformationCategory
+class Category
 {
     std::string categoryName;
     std::map<std::string, std::string> information;
@@ -16,7 +16,7 @@ class InformationCategory
         static const std::string DefaultCategory;
 
     public:
-        InformationCategory(const std::string& categoryName);
+        Category(const std::string& categoryName);
 
         inline const std::string& name() const
         {
@@ -27,7 +27,7 @@ class InformationCategory
         const std::string& get(const std::string& name) const;
 };
 
-inline bool operator==(const InformationCategory& lhs, const InformationCategory& rhs)
+inline bool operator==(const Category& lhs, const Category& rhs)
 {
     return lhs.name() == rhs.name();
 }

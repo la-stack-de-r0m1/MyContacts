@@ -35,12 +35,12 @@ void Contact::setDetail(const std::string& categoryName, const Contact::ContactD
 
 const std::string& Contact::getGenericDetail(const std::string& name) const
 {
-    return getDetail(InformationCategory::DefaultCategory, name);
+    return getDetail(Category::DefaultCategory, name);
 }
 
 void Contact::setGenericDetail(const std::string& name, const std::string& value)
 {
-    createOrUpdateCategory(InformationCategory::DefaultCategory, {name, value});
+    createOrUpdateCategory(Category::DefaultCategory, {name, value});
 }
 
 void Contact::createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail)
@@ -59,7 +59,7 @@ void Contact::updateCategory(const std::string& categoryName, const ContactDetai
 
 void Contact::createCategory(const std::string& categoryName, const ContactDetail& detail)
 {
-    InformationCategory newCategory{categoryName};
+    Category newCategory{categoryName};
     newCategory.set(detail.first, detail.second);
     categories.add(newCategory);
 }

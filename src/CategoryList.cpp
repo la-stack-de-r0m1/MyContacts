@@ -5,18 +5,18 @@
 namespace MyContacts
 {
 
-const InformationCategory& CategoryList::get(const std::string& name) const
+const Category& CategoryList::get(const std::string& name) const
 {
     return findCategory(name);
 }
 
-void CategoryList::add(const InformationCategory& category)
+void CategoryList::add(const Category& category)
 {
     if (!categoryExist(category.name()))
         categories.push_back(category);
 }
 
-void CategoryList::update(const InformationCategory& category)
+void CategoryList::update(const Category& category)
 {
     std::replace(
         categories.begin(),
@@ -26,7 +26,7 @@ void CategoryList::update(const InformationCategory& category)
     );
 }
 
-const InformationCategory& CategoryList::findCategory(const std::string& name) const
+const Category& CategoryList::findCategory(const std::string& name) const
 {
     auto categoryIt = findCategoryPos(name);
     if (categoryIt == std::end(categories))

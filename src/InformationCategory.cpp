@@ -5,14 +5,14 @@
 namespace MyContacts
 {
 
-const std::string InformationCategory::DefaultCategory{"Other"};
+const std::string Category::DefaultCategory{"Other"};
 
-InformationCategory::InformationCategory(const std::string& categoryName)
+Category::Category(const std::string& categoryName)
     : categoryName{categoryName}
 {
 }
 
-const std::string& InformationCategory::get(const std::string& name) const
+const std::string& Category::get(const std::string& name) const
 {
     try
     {
@@ -24,7 +24,7 @@ const std::string& InformationCategory::get(const std::string& name) const
     }
 }
 
-void InformationCategory::set(const std::string& name, const std::string& value)
+void Category::set(const std::string& name, const std::string& value)
 {
     information[name] = value;
 }

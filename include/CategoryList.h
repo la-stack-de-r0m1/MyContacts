@@ -11,15 +11,15 @@ namespace MyContacts
 class CategoryList
 {
     public:
-        using CategoriesCtr = std::vector<InformationCategory>;
-        using CategoriesCtrIter = std::vector<InformationCategory>::const_iterator;
+        using CategoriesCtr = std::vector<Category>;
+        using CategoriesCtrIter = std::vector<Category>::const_iterator;
 
         /**
         * return the INformationCategory whose name is `name`.
         *
         * Throw an std::out_of_range exception if it does not exist.
         */
-        const InformationCategory& get(const std::string& name) const;
+        const Category& get(const std::string& name) const;
 
 
         /**
@@ -27,14 +27,14 @@ class CategoryList
         * Does nothing if an InformationCategory with the same name already
         * exist.
         */
-        void add(const InformationCategory& category);
+        void add(const Category& category);
 
         /**
         * Update the category whose name is category.name().
         *
         * Does nothing if the category does not exist.
         */
-        void update(const InformationCategory& category);
+        void update(const Category& category);
 
         /**
         * return true if the category whose name is `name` exists, false otherwise.
@@ -46,7 +46,7 @@ class CategoryList
 
     private:
         CategoriesCtrIter findCategoryPos(const std::string& name) const;
-        const InformationCategory& findCategory(const std::string& name) const;
+        const Category& findCategory(const std::string& name) const;
 };
 
 }
