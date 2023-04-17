@@ -19,8 +19,8 @@ BOOST_AUTO_TEST_CASE( testCategoryName )
 BOOST_AUTO_TEST_CASE( testSetEmail )
 {
     Category ic{"Contact details"};
-    ic.set("E-mail", "r0m1@me.com");
-    const auto& email = ic.get("E-mail");
+    ic.setContactDetail("E-mail", "r0m1@me.com");
+    const auto& email = ic.getContactDetail("E-mail");
     BOOST_TEST("r0m1@me.com" == email);
 }
 
@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE( testGetThrowIfInfoNotExist )
 {
     Category ic{"Contact details"};
 
-    BOOST_CHECK_THROW(ic.get("E-mail"), std::out_of_range);
+    BOOST_CHECK_THROW(ic.getContactDetail("E-mail"), std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE( testEqualOperatorIsEqual )

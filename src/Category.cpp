@@ -12,7 +12,7 @@ Category::Category(const std::string& categoryName)
 {
 }
 
-const std::string& Category::get(const std::string& name) const
+const std::string& Category::getContactDetail(const std::string& name) const
 {
     try
     {
@@ -24,7 +24,7 @@ const std::string& Category::get(const std::string& name) const
     }
 }
 
-void Category::set(const std::string& name, const std::string& value)
+void Category::setContactDetail(const std::string& name, const std::string& value)
 {
     contactDetails[name] = value;
 }

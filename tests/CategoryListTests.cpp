@@ -28,11 +28,11 @@ BOOST_AUTO_TEST_CASE( testUpdate )
     CategoryList catList;
     catList.add({"Contact details"});
     auto category = catList.get("Contact details");
-    category.set("E-mail", "rom@1.fr");
+    category.setContactDetail("E-mail", "rom@1.fr");
 
     catList.update(category);
     auto updatedCategory = catList.get("Contact details");
-    BOOST_TEST("rom@1.fr" == updatedCategory.get("E-mail"));
+    BOOST_TEST("rom@1.fr" == updatedCategory.getContactDetail("E-mail"));
 }
 
 BOOST_AUTO_TEST_CASE( testExist )

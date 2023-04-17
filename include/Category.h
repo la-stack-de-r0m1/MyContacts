@@ -23,8 +23,8 @@ class Category
             return categoryName;
         };
 
-        void set(const std::string& name, const std::string& value);
-        const std::string& get(const std::string& name) const;
+        void setContactDetail(const std::string& name, const std::string& value);
+        const std::string& getContactDetail(const std::string& name) const;
 };
 
 inline bool operator==(const Category& lhs, const Category& rhs)

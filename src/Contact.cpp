@@ -25,7 +25,7 @@ ContactIdentity& Contact::getIdentity()
 
 const std::string& Contact::getDetail(const std::string& category, const std::string& detailName) const
 {
-    return categories.get(category).get(detailName);
+    return categories.get(category).getContactDetail(detailName);
 }
 
 void Contact::setDetail(const std::string& categoryName, const Contact::ContactDetail& detail)
@@ -53,14 +53,14 @@ void Contact::createOrUpdateCategory(const std::string& categoryName, const Cont
 void Contact::updateCategory(const std::string& categoryName, const ContactDetail& detail)
 {
     auto category = categories.get(categoryName);
-    category.set(detail.first, detail.second);
+    category.setContactDetail(detail.first, detail.second);
     categories.update(category);
 }
 
 void Contact::createCategory(const std::string& categoryName, const ContactDetail& detail)
 {
     Category newCategory{categoryName};
-    newCategory.set(detail.first, detail.second);
+    newCategory.setContactDetail(detail.first, detail.second);
     categories.add(newCategory);
 }
 
