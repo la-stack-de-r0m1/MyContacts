@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-#include "InformationCategory.h"
+#include "Category.h"
 
 using namespace MyContacts;
 

@@ -12,7 +12,13 @@ namespace MyContacts
 {
 
 /**
+* This class represent a single contact.
 *
+* Each contact detail belongs to a category. For examples:
+*  - 'E-mail' and 'Phone number' would be in the 'Contact details' category.
+*  - 'Street name', 'Street number', etc, would be in the 'Address' category.
+*
+* The default category is 'Others'.
 */
 class Contact
 {

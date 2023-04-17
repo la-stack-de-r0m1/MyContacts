@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "InformationCategory.h"
+#include "Category.h"
 
 namespace MyContacts
 {
