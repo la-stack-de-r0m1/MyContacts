@@ -1,6 +1,8 @@
 #include <stdexcept>
+#include <algorithm>
 
 #include "Category.h"
+#include "ContactDetail.h"
 
 namespace MyContacts
 {
@@ -16,7 +18,15 @@ const std::string& Category::getContactDetail(const std::string& name) const
 {
     try
     {
-        return contactDetails.at(name);
+        auto pos = std::find_if(
+            std::begin(contactDetails),
+            std::end(contactDetails),
+            [&name](const auto& ptr) { return ptr->getDetailName() == name; }
+        );
+        if (pos == std::end(contactDetails))
+            throw std::out_of_range{"detail not found"};
+
+        return (*pos)->getDetailValue();
     }
     catch (const std::out_of_range& e)
     {
@@ -26,7 +36,7 @@ const std::string& Category::getContactDetail(const std::string& name) const
 
 void Category::setContactDetail(const std::string& name, const std::string& value)
 {
-    contactDetails[name] = value;
+   contactDetails.emplace_back(std::make_shared<ContactDetail>(name, value));
 }
 
 }

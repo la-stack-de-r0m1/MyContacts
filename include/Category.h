@@ -2,10 +2,13 @@
 #define INFORMATIONCATEGORY_H
 
 #include <string>
-#include <map>
+#include <list>
+#include <memory>
 
 namespace MyContacts
 {
+
+class ContactDetail;
 
 /**
 * The contact details of a single contact are set to 'categories'.
@@ -17,8 +20,13 @@ namespace MyContacts
 */
 class Category
 {
-    std::string categoryName;
-    std::map<std::string, std::string> contactDetails;
+    public:
+        using ContactDetailPtr = std::shared_ptr<ContactDetail>;
+        using ContactDetailList = std::list<ContactDetailPtr>;
+
+    private:
+        std::string categoryName;
+        ContactDetailList contactDetails;
 
     public:
         /**
