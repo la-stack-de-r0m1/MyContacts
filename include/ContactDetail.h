@@ -17,16 +17,18 @@ namespace MyContacts
 class ContactDetail
 {
     std::string detailName;
-    std::string detailValue;
     std::string detailLabel;
 
     public:
         ContactDetail(const std::string& detailName,
                       const std::string& detailValue);
+        virtual ~ContactDetail() = default;
 
         inline const std::string& getDetailName() const { return detailName; }
-        inline void setDetailValue(const std::string& value) { detailValue = value; }
-        inline const std::string& getDetailValue() const { return detailValue; }
+
+        virtual void setDetailValue(const std::string& value) = 0;
+        virtual const std::string& toString() const = 0;
+
         inline void setLabel(const std::string& label) { detailLabel = label; }
         inline const std::string& getLabel() const { return detailLabel; }
 };

@@ -2,7 +2,7 @@
 #include <algorithm>
 
 #include "Category.h"
-#include "ContactDetail.h"
+#include "StringContactDetail.h"
 
 namespace MyContacts
 {
@@ -26,7 +26,7 @@ const std::string& Category::getContactDetail(const std::string& name) const
         if (pos == std::end(contactDetails))
             throw std::out_of_range{"detail not found"};
 
-        return (*pos)->getDetailValue();
+        return (*pos)->toString();
     }
     catch (const std::out_of_range& e)
     {
@@ -36,7 +36,7 @@ const std::string& Category::getContactDetail(const std::string& name) const
 
 void Category::setContactDetail(const std::string& name, const std::string& value)
 {
-   contactDetails.emplace_back(std::make_shared<ContactDetail>(name, value));
+    contactDetails.emplace_back(std::make_shared<StringContactDetail>(name, value));
 }
 
 }
