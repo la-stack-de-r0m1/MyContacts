@@ -7,6 +7,7 @@
 
 #include "ContactIdentity.h"
 #include "CategoryList.h"
+#include "StringContactDetail.h"
 
 namespace MyContacts
 {
@@ -23,10 +24,11 @@ namespace MyContacts
 class Contact
 {
     ContactIdentity identity;
-    CategoryList categories;
+
+    CategoryList<StringContactDetail> userDefinedCategories;
 
     public:
-        using ContactDetail =  std::pair<std::string, std::string>;
+        using DetailKeyValue =  std::pair<std::string, std::string>;
 
         Contact(const std::string& firstname,
                 const std::string& lastname = "",
@@ -35,16 +37,16 @@ class Contact
         const ContactIdentity& getIdentity() const;
         ContactIdentity& getIdentity();
 
-        const std::string& getDetail(const std::string& category, const std::string& detailName) const;
-        void setDetail(const std::string& category, const ContactDetail& detail);
+        const std::string getDetail(const std::string& category, const std::string& detailName) const;
+        void setDetail(const std::string& category, const DetailKeyValue& detail);
 
         void setGenericDetail(const std::string& name, const std::string& value);
-        const std::string& getGenericDetail(const std::string& name) const;
+        const std::string getGenericDetail(const std::string& name) const;
 
     private:
-        void createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail);
-        void createCategory(const std::string& categoryName, const ContactDetail& detail);
-        void updateCategory(const std::string& categoryName, const ContactDetail& detail);
+        void createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail);
+        void createCategory(const std::string& categoryName, const DetailKeyValue& detail);
+        void updateCategory(const std::string& categoryName, const DetailKeyValue& detail);
 };
 
 } //namespace MyContacts

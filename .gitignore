@@ -1,6 +1,8 @@
 CppCheckResults.xml
 ValgrindOut.xml
 
+FakeIt/
+cachegrind.out*
 
 *.cbp
 *.o

@@ -14,23 +14,31 @@ namespace MyContacts
 *
 * A contact detail has at least a name and a value; the label can be left empty.
 */
+template <typename T>
 class ContactDetail
 {
     std::string detailName;
+    T detailValue;
     std::string detailLabel;
 
     public:
         ContactDetail(const std::string& detailName,
-                      const std::string& detailValue);
+                      const T& detailValue)
+            : detailName{detailName}
+            , detailValue{detailValue}
+        {}
+
         virtual ~ContactDetail() = default;
 
         inline const std::string& getDetailName() const { return detailName; }
 
-        virtual void setDetailValue(const std::string& value) = 0;
-        virtual const std::string& toString() const = 0;
+        inline void setDetailValue(const T& value) { detailValue = value; }
+        inline const T& getDetailValue() const { return detailValue; }
 
         inline void setLabel(const std::string& label) { detailLabel = label; }
         inline const std::string& getLabel() const { return detailLabel; }
+
+        virtual const std::string toString() const = 0;
 };
 
 }

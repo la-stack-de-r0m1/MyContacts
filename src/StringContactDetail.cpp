@@ -5,19 +5,13 @@ namespace MyContacts
 
 
 StringContactDetail::StringContactDetail(const std::string& name, const std::string& value)
-    : ContactDetail(name, "")
-    , value{value}
+    : ContactDetail(name, value)
 {
 }
 
-void StringContactDetail::setDetailValue(const std::string& value)
+const std::string StringContactDetail::toString() const
 {
-    this->value = value;
-}
-
-const std::string& StringContactDetail::toString() const
-{
-    return value;
+    return std::string(getDetailValue());
 }
 
 }

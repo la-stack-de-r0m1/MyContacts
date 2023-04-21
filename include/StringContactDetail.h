@@ -8,15 +8,13 @@
 namespace MyContacts
 {
 
-class StringContactDetail final : public ContactDetail
+class StringContactDetail final
+    : public ContactDetail<std::string>
 {
-    std::string value;
-
     public:
         StringContactDetail(const std::string& name, const std::string& value);
 
-        virtual void setDetailValue(const std::string& value) override;
-        virtual const std::string& toString() const override;
+        virtual const std::string toString() const override;
 };
 
 }

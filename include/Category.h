@@ -4,10 +4,14 @@
 #include <string>
 #include <list>
 #include <memory>
+#include <stdexcept>
+
+#include "StringContactDetail.h"
 
 namespace MyContacts
 {
 
+template <typename T>
 class ContactDetail;
 
 /**
@@ -18,50 +22,79 @@ class ContactDetail;
 *
 * Each contact detail belongs to a category, and the default category is Other.
 */
+template <typename T>
 class Category
 {
-    public:
-        using ContactDetailPtr = std::shared_ptr<ContactDetail>;
-        using ContactDetailList = std::list<ContactDetailPtr>;
+public:
+    using ContactDetailPtr = std::shared_ptr<T>;
+    using ContactDetailList = std::list<ContactDetailPtr>;
 
-    private:
-        std::string categoryName;
-        ContactDetailList contactDetails;
+private:
+    std::string categoryName;
+    ContactDetailList contactDetails;
 
-    public:
-        /**
-        * Default category's name ('Other').
-        */
-        static const std::string DefaultCategory;
+    // public:
+    /**
+    * Default category's name ('Other').
+    */
+    // static const std::string DefaultCategory;
 
-    public:
-        Category(const std::string& categoryName);
+public:
+    Category(const std::string& categoryName)
+        : categoryName{categoryName}
+    {
+    }
 
-        /**
-        * return the current category name.
-        */
-        inline const std::string& name() const
+    /**
+    * return the current category name.
+    */
+    inline const std::string& name() const
+    {
+        return categoryName;
+    };
+
+    /**
+    * create a new contact detail in the category whose name is `name` and
+    * value is `value`.
+    */
+    void setContactDetail(const std::string& name, const std::string& value)
+    {
+        contactDetails.emplace_back(std::make_shared<T>(name, value));
+    }
+
+    /**
+    * return the value of the contact detail whose name is `name`.
+    */
+    const std::string getContactDetail(const std::string& name) const
+    {
+        try
         {
-            return categoryName;
-        };
+            auto pos = std::find_if(
+               std::begin(contactDetails),
+               std::end(contactDetails),
+               [&name](const auto& ptr)
+                {
+                    return ptr->getDetailName() == name;
+                });
+            if (pos == std::end(contactDetails))
+                throw std::out_of_range{"detail not found"};
 
-        /**
-        * create a new contact detail in the category whose name is `name` and
-        * value is `value`.
-        */
-        void setContactDetail(const std::string& name, const std::string& value);
-
-        /**
-        * return the value of the contact detail whose name is `name`.
-        */
-        const std::string& getContactDetail(const std::string& name) const;
+            return (*pos)->toString();
+        }
+        catch (const std::out_of_range& e)
+        {
+            throw e;
+        }
+    }
 };
 
-inline bool operator==(const Category& lhs, const Category& rhs)
+template <typename T>
+inline bool operator==(const Category<T>& lhs, const Category<T>& rhs)
 {
     return lhs.name() == rhs.name();
 }
 
 }
+
 
 #endif // INFORMATIONCATEGORY_H

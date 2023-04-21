@@ -23,45 +23,45 @@ ContactIdentity& Contact::getIdentity()
     return identity;
 }
 
-const std::string& Contact::getDetail(const std::string& category, const std::string& detailName) const
+const std::string Contact::getDetail(const std::string& category, const std::string& detailName) const
 {
-    return categories.get(category).getContactDetail(detailName);
+    return userDefinedCategories.get(category).getContactDetail(detailName);
 }
 
-void Contact::setDetail(const std::string& categoryName, const Contact::ContactDetail& detail)
+void Contact::setDetail(const std::string& categoryName, const Contact::DetailKeyValue& detail)
 {
     createOrUpdateCategory(categoryName, detail);
 }
 
-const std::string& Contact::getGenericDetail(const std::string& name) const
+const std::string Contact::getGenericDetail(const std::string& name) const
 {
-    return getDetail(Category::DefaultCategory, name);
+    return getDetail("Other", name);
 }
 
 void Contact::setGenericDetail(const std::string& name, const std::string& value)
 {
-    createOrUpdateCategory(Category::DefaultCategory, {name, value});
+    createOrUpdateCategory("Other", {name, value});
 }
 
-void Contact::createOrUpdateCategory(const std::string& categoryName, const ContactDetail& detail)
+void Contact::createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail)
 {
-    categories.categoryExist(categoryName)
+    userDefinedCategories.categoryExist(categoryName)
         ? updateCategory(categoryName, detail)
         : createCategory(categoryName, detail);
 }
 
-void Contact::updateCategory(const std::string& categoryName, const ContactDetail& detail)
+void Contact::updateCategory(const std::string& categoryName, const DetailKeyValue& detail)
 {
-    auto category = categories.get(categoryName);
+    auto category = userDefinedCategories.get(categoryName);
     category.setContactDetail(detail.first, detail.second);
-    categories.update(category);
+    userDefinedCategories.update(category);
 }
 
-void Contact::createCategory(const std::string& categoryName, const ContactDetail& detail)
+void Contact::createCategory(const std::string& categoryName, const DetailKeyValue& detail)
 {
-    Category newCategory{categoryName};
+    Category<StringContactDetail> newCategory{categoryName};
     newCategory.setContactDetail(detail.first, detail.second);
-    categories.add(newCategory);
+    userDefinedCategories.add(newCategory);
 }
 
 }

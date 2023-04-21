@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "CategoryList.h"
+#include "StringContactDetail.h"
 
 using namespace MyContacts;
 
@@ -11,7 +12,7 @@ BOOST_AUTO_TEST_SUITE ( CategoryListTests )
 
 BOOST_AUTO_TEST_CASE( testFindCategoryByName )
 {
-    CategoryList catList;
+    CategoryList<StringContactDetail> catList;
     catList.add({"Contact details"});
     auto category = catList.get("Contact details");
     BOOST_TEST("Contact details" == category.name());
@@ -19,13 +20,13 @@ BOOST_AUTO_TEST_CASE( testFindCategoryByName )
 
 BOOST_AUTO_TEST_CASE( testThrowIfNoCategoryFound )
 {
-    CategoryList catList;
+    CategoryList<StringContactDetail> catList;
     BOOST_CHECK_THROW(catList.get("Contact details"), std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE( testUpdate )
 {
-    CategoryList catList;
+    CategoryList<StringContactDetail> catList;
     catList.add({"Contact details"});
     auto category = catList.get("Contact details");
     category.setContactDetail("E-mail", "rom@1.fr");
@@ -37,7 +38,7 @@ BOOST_AUTO_TEST_CASE( testUpdate )
 
 BOOST_AUTO_TEST_CASE( testExist )
 {
-    CategoryList catList;
+    CategoryList<StringContactDetail> catList;
     BOOST_TEST(false == catList.categoryExist("Contact details"));
 
     catList.add({"Contact details"});
