@@ -12,8 +12,6 @@ class StringContactDetail final
     : public ContactDetail<std::string>
 {
     public:
-        //typedef std::string value_type;
-
         StringContactDetail(const std::string& name, const std::string& value);
 
         virtual const std::string toString() const override;

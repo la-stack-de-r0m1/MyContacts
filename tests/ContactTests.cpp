@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE( testCreateCategoryIfNotExist )
     BOOST_TEST("r0m1@me.com" == email);
 }
 
-BOOST_AUTO_TEST_CASE( testAddAddressCategory )
+BOOST_AUTO_TEST_CASE( testAddAddress )
 {
 
 }

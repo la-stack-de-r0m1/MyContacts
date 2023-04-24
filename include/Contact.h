@@ -51,13 +51,6 @@ class Contact
 };
 
 
-/*template<>
-void Contact::addContactDetail<Contact::CategoriesValue::ADDRESSES>(const std::string& name,
-                              const std::map<std::string, std::string>& value)
-{
-
-}*/
-
 } //namespace MyContacts
 
 #endif // CONTACT_H
