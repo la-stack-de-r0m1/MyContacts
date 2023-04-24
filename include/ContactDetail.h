@@ -22,6 +22,8 @@ class ContactDetail
     std::string detailLabel;
 
     public:
+        typedef T value_type;
+
         ContactDetail(const std::string& detailName,
                       const T& detailValue)
             : detailName{detailName}

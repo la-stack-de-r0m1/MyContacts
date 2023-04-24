@@ -68,8 +68,8 @@ BOOST_AUTO_TEST_CASE( testTrimSpacesCharacters )
 BOOST_AUTO_TEST_CASE( testAddPersonalInfo )
 {
     Contact c{"romain"};
-    c.setGenericDetail("Phone Number", "0123456789");
-    auto phone_number = c.getGenericDetail("Phone Number");
+    c.addContactDetail("Phone Number", "0123456789");
+    auto phone_number = c.getContactDetail("Phone Number");
 
     BOOST_TEST("0123456789" == phone_number);
 }
@@ -77,22 +77,27 @@ BOOST_AUTO_TEST_CASE( testAddPersonalInfo )
 BOOST_AUTO_TEST_CASE( testThrowIfPersonalInfoNotFound )
 {
     Contact c{"romain"};
-    BOOST_CHECK_THROW(c.getGenericDetail("Phone Number"), std::out_of_range);
+    BOOST_CHECK_THROW(c.getContactDetail("Phone Number"), std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE( testThrowIfCategoryIfNotExist )
 {
     Contact contact{"romain"};
-    BOOST_CHECK_THROW(contact.getDetail("category", "name"), std::out_of_range);
+    BOOST_CHECK_THROW(contact.getContactDetail("category", "name"), std::out_of_range);
 }
 
 BOOST_AUTO_TEST_CASE( testCreateCategoryIfNotExist )
 {
     Contact contact{"romain"};
-    contact.setDetail("Contacts", {"E-mail", "r0m1@me.com"});
+    contact.addContactDetail("Contacts", Contact::DetailKeyValue{"E-mail", "r0m1@me.com"});
 
-    const auto email = contact.getDetail("Contacts", "E-mail");
+    const auto email = contact.getContactDetail("Contacts", "E-mail");
     BOOST_TEST("r0m1@me.com" == email);
+}
+
+BOOST_AUTO_TEST_CASE( testAddAddressCategory )
+{
+
 }
 
 BOOST_AUTO_TEST_SUITE_END( )

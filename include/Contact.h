@@ -7,6 +7,7 @@
 
 #include "ContactIdentity.h"
 #include "CategoryList.h"
+#include "MapContactDetail.h"
 #include "StringContactDetail.h"
 
 namespace MyContacts
@@ -24,7 +25,7 @@ namespace MyContacts
 class Contact
 {
     ContactIdentity identity;
-
+    Category<MapContactDetail> addresses;
     CategoryList<StringContactDetail> userDefinedCategories;
 
     public:
@@ -37,17 +38,25 @@ class Contact
         const ContactIdentity& getIdentity() const;
         ContactIdentity& getIdentity();
 
-        const std::string getDetail(const std::string& category, const std::string& detailName) const;
-        void setDetail(const std::string& category, const DetailKeyValue& detail);
+        void addContactDetail(const std::string& name, const std::string& value);
+        const std::string getContactDetail(const std::string& detailName) const;
 
-        void setGenericDetail(const std::string& name, const std::string& value);
-        const std::string getGenericDetail(const std::string& name) const;
+        void addContactDetail(const std::string& category, const DetailKeyValue& detail);
+        const std::string getContactDetail(const std::string& category, const std::string& detailName) const;
 
     private:
         void createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail);
         void createCategory(const std::string& categoryName, const DetailKeyValue& detail);
         void updateCategory(const std::string& categoryName, const DetailKeyValue& detail);
 };
+
+
+/*template<>
+void Contact::addContactDetail<Contact::CategoriesValue::ADDRESSES>(const std::string& name,
+                              const std::map<std::string, std::string>& value)
+{
+
+}*/
 
 } //namespace MyContacts
 

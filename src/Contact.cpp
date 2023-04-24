@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 
 #include "Contact.h"
 #include "StringHelpers.h"
@@ -10,6 +11,7 @@ Contact::Contact(const std::string& firstname,
                  const std::string& lastname,
                  const std::string& nickname)
     : identity{firstname, lastname, nickname}
+    , addresses{"Addresses"}
 {
 }
 
@@ -23,24 +25,24 @@ ContactIdentity& Contact::getIdentity()
     return identity;
 }
 
-const std::string Contact::getDetail(const std::string& category, const std::string& detailName) const
+const std::string Contact::getContactDetail(const std::string& category, const std::string& detailName) const
 {
     return userDefinedCategories.get(category).getContactDetail(detailName);
 }
 
-void Contact::setDetail(const std::string& categoryName, const Contact::DetailKeyValue& detail)
+void Contact::addContactDetail(const std::string& categoryName, const Contact::DetailKeyValue& detail)
 {
     createOrUpdateCategory(categoryName, detail);
 }
 
-const std::string Contact::getGenericDetail(const std::string& name) const
-{
-    return getDetail("Other", name);
-}
-
-void Contact::setGenericDetail(const std::string& name, const std::string& value)
+void Contact::addContactDetail(const std::string& name, const std::string& value)
 {
     createOrUpdateCategory("Other", {name, value});
+}
+
+const std::string Contact::getContactDetail(const std::string& name) const
+{
+    return getContactDetail("Other", name);
 }
 
 void Contact::createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail)
