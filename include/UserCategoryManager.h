@@ -17,12 +17,13 @@ class UserCategoryManager final
         const std::string DefaultCategory{"Other"};
         using KeyValue =  std::pair<std::string, std::string>;
 
+    public:
         UserCategoryManager() = default;
         UserCategoryManager(const UserCategoryManager& other) = delete;
         UserCategoryManager& operator=(const UserCategoryManager& other) = delete;
 
         void addContactDetailToDefault(const std::string& detailName, const std::string& detailValue);
-        const std::string getContactDetailFromDefault(const std::string& detailName);
+        const std::string getContactDetailFromDefault(const std::string& detailName) const;
 
         void addContactDetailToCategory(const std::string& category, const KeyValue& detail);
         const std::string getContactDetailFromCategory(const std::string& category, const std::string& detailName) const;

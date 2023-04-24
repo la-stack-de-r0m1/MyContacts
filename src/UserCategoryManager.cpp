@@ -10,7 +10,7 @@ void UserCategoryManager::addContactDetailToDefault(const std::string& detailNam
     addContactDetailToCategory(UserCategoryManager::DefaultCategory, {detailName, detailValue});
 }
 
-const std::string UserCategoryManager::getContactDetailFromDefault(const std::string& detailName)
+const std::string UserCategoryManager::getContactDetailFromDefault(const std::string& detailName) const
 {
     return getContactDetailFromCategory(UserCategoryManager::DefaultCategory, detailName);
 }

@@ -27,25 +27,30 @@ ContactIdentity& Contact::getIdentity()
 
 const std::string Contact::getContactDetail(const std::string& category, const std::string& detailName) const
 {
-    return userDefinedCategories.get(category).getContactDetail(detailName);
+    return userCategories.getContactDetailFromCategory(category, detailName);
+    //userDefinedCategories.get(category).getContactDetail(detailName);
 }
 
 void Contact::addContactDetail(const std::string& categoryName, const Contact::DetailKeyValue& detail)
 {
-    createOrUpdateCategory(categoryName, detail);
+    userCategories.addContactDetailToCategory(categoryName, detail);
+    //createOrUpdateCategory(categoryName, detail);
 }
 
 void Contact::addContactDetail(const std::string& name, const std::string& value)
 {
-    createOrUpdateCategory("Other", {name, value});
+
+    userCategories.addContactDetailToDefault(name, value);
+    //createOrUpdateCategory("Other", {name, value});
 }
 
 const std::string Contact::getContactDetail(const std::string& name) const
 {
-    return getContactDetail("Other", name);
+    return userCategories.getContactDetailFromDefault(name);
+    //getContactDetail("Other", name);
 }
 
-void Contact::createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail)
+/*void Contact::createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail)
 {
     userDefinedCategories.categoryExist(categoryName)
         ? updateCategory(categoryName, detail)
@@ -64,7 +69,7 @@ void Contact::createCategory(const std::string& categoryName, const DetailKeyVal
     Category<StringContactDetail> newCategory{categoryName};
     newCategory.setContactDetail(detail.first, detail.second);
     userDefinedCategories.add(newCategory);
-}
+}*/
 
 }
 
