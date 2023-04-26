@@ -9,7 +9,6 @@
 #include "UserCategoryManager.h"
 #include "CategoryList.h"
 #include "MapContactDetail.h"
-//#include "StringContactDetail.h"
 
 namespace MyContacts
 {
@@ -28,8 +27,6 @@ class Contact
     ContactIdentity identity;
     Category<MapContactDetail> addresses;
     UserCategoryManager userCategories;
-    //CategoryList<StringContactDetail> userDefinedCategories;
-
 
     public:
         using DetailKeyValue =  std::pair<std::string, std::string>;
@@ -46,11 +43,6 @@ class Contact
 
         void addContactDetail(const std::string& category, const DetailKeyValue& detail);
         const std::string getContactDetail(const std::string& category, const std::string& detailName) const;
-
-   /* private:
-        void createOrUpdateCategory(const std::string& categoryName, const DetailKeyValue& detail);
-        void createCategory(const std::string& categoryName, const DetailKeyValue& detail);
-        void updateCategory(const std::string& categoryName, const DetailKeyValue& detail);*/
 };
 
 
