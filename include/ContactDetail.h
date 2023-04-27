@@ -29,6 +29,7 @@ class ContactDetail
             : detailName{detailName}
             , detailValue{detailValue}
         {}
+        ContactDetail(const std::string& detailName) : detailName{detailName} {}
 
         virtual ~ContactDetail() = default;
 

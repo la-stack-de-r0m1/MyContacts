@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include "ContactAddress.h"
+#include "testHelpers.h"
 
 using namespace MyContacts;
 
@@ -8,17 +9,7 @@ BOOST_AUTO_TEST_SUITE ( ContactAddressTests )
 
 BOOST_AUTO_TEST_CASE( testSetGetValues )
 {
-    ContactAddress ca;
-
-    ca.setStreetNumber(42)
-        .setStreetName("some lost street")
-        .setBuilding("Bat. A")
-        .setDoorPinCode("8484A")
-        .setFloorNumber(2)
-        .setAdditionalInfo("Some info...")
-        .setZipcode("75000")
-        .setCityName("Paris")
-        .setCountry("France");
+    ContactAddress ca{createTestContactAddress()};
 
     BOOST_TEST(42 == ca.getStreetNumber());
     BOOST_TEST("some lost street" == ca.getStreetName());
